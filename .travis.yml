@@ -1,0 +1,12 @@
+language: ruby
+cache:
+- bundler
+before_script:
+- bundle exec rake assets:precompile
+deploy:
+  provider: heroku
+  api_key:
+    secure: "MPGnAmudaAtB6YPAlMsSH2x03r9wuWOMFEMKxuP2425z5Zq27W8iMMzTgdKE4eIc1v1UesbnYtr1IGCHO41GH57Elyqy4qoZrKLw+QwfIWDBd98W4llkh3FE3E6rcfojtUsXJ3yiUaNNTkBuWWmra9egp96mZkgDUujDbmbj2MD1iwCl7EhPzj+7TwYNmhazLzEUzBe1DRpZuTFvYIsKvy7+cuA3PsjXHBaOCnUq6z9RYmp585VhHDrHjOvX4TgGCxYQOmFGCTgrLJo5wYeneKrUDsX0zsJ6gOMG/8Tk+2GM6uLW+KPlirfeGJ1YLiQnLv1EhRMtCPU9WbAOUixSXAklGb5Qm+LfFheEOsMEaAuk96p8Z9zbo3btcypGLkf6rlLT2iHSsTCJia0Y8mq+Q++uR54oTdWEAgNSaFZwKC7gJqqkB231HkRELCBaxiakyJN1+6xmlze5ZfZeSjY2/x3/3URhwkkNvrg7/xciIdhxMNf+FUcATjv0ZIk+kkhYo7ohgGDCdvtZM3IKXZuCJsavqqiaD/nUAf6l6DV+GwCaEHPPAt86/unwE+FoRyarV6+Q4nOVmIL7mQlJaRxtCKk5Jx+T9jTKUGgewPuX1riztj4Ulnjqj97EcdNAFGFSVN2UONXf4t7CAPJ1hPD8CFgrmwKWOpmGfzRrRC0vLeY="
+  app: pawn-royal
+  on:
+    repo: Pawns2bRoyal/pawn_royal

@@ -1,7 +1,17 @@
 language: ruby
-rvm:
-- 2.5.3
-- jruby
+cache:
+- bundler
+before_script:
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+- bundle exec rake assets:precompile
+deploy:
+  provider: heroku
+  api_key:
+    secure: KEY
+  app: pawn_royal
+  on:
+    repo: Pawns2bRoyal/pawn_royal
 env:
-  - DB=postgresql
-
+  global:
+    secure: cqbAriLQDUdWbZWrgpQRTOnxXCkhf+hGUX3X2FYWjrIPJTwCdVLXWm5MHXLLDZba+sDKK6ORFSJsyZCaDnkYTKsUQprFZPtidnX2sFSC2HwlGvJRIY0to1GbAwHCN8jinb2d9HdFw25C7YJnpBEGf2ELu1LaBABaxWwDY9Lp7om248shquvrw1qaQjBj2uHNVdM5bJEMx8dy2BGAAtOLtGQ0M3DEwUOcMrG2rFsdtTZk8K25naJ+t2QNh2zmmQ74Xcp/QrXcH+3G6lzcGyVc3e3tWabxtpXt//1rl15eO5nHtSDQMwIWnm6tpvMI9DxnDE2DwUbdFGeGcVEU3SUJnQ4Iy0NRvn8OSB/GnSsrsM/nm/aZBPVk/UinXBdtMpRbnsPMSaPTxRrCohGM+EjQlc0/CAei29ngoaGst2IIfHtJt/c3K5oK4POH7TJssMvM5LHSw/DgwxT+BrUptuizn5GJlvCqkDn9FPTQZbOQPi/VlddFs5Ugb7oCHLW9Yy+AD2nCX86+H9VjcJGlEtFtb5JsX9QGAyJMigfoqLyBl1GcC5NDO9/nC0dfBZrfmI+KMmVcbrGtYNIttWrYmKaOOe1mm0SzJoFCwhAIiQqqItiyeQEP4nmpqOMpUw4ID3kXffZ7g9/x/NHun+VXT/eDVqPBKdQGkIOozLUX3yYvcVg=

@@ -1,8 +1,8 @@
 language: ruby
-cache:
-- bundler
-before_script:
-- bundle exec rake assets:precompile
+#cache:
+#- bundler
+script:
+- bundle exec rake spec
 deploy:
   provider: heroku
   api_key:

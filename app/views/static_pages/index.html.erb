@@ -1,1 +1,37 @@
 <h1>Welcome to our chess app!</h1>
+<style>
+  div {
+    border:1px solid black;
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: #fff;
+    color: #000;
+    margin: 0 -1px -1px 0;
+  }
+
+  .clear { clear:both }
+  .black {background: #000;color:#fff;}
+  .white {background: #fff;color:#000;}
+</style>
+
+<script>
+  var row = 0;
+  while ( row < 8 ) {
+    var column = 0;
+    while ( column < 8 ) {
+      var square = document.createElement("div");
+      if ( row % 2 === 0 ) {
+        square.className = ( column%2 === 0 )? "white" : "black";
+      } else {
+        square.className = ( column%2 === 0 )? "black" : "white";
+      }
+      if (column === 0){
+        square.className += " clear";
+      }
+      document.body.appendChild(square);
+      column++
+    }
+    row++;
+  }
+</script>

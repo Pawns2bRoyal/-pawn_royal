@@ -3,6 +3,6 @@ class Piece < ApplicationRecord
   self.inheritance_column = :type
 
   def self.types
-    (Pawn Rook Knight Bishop Queen King)
+    %w(Pawn Rook Knight Bishop Queen King)
   end
 end

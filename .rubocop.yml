@@ -1,0 +1,37 @@
+Metrics/LineLength:
+  Enabled: false
+
+Style/Documentation: 
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/games_controller.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/controllers/games_controller.rb'    
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/games_controller.rb'
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'test/*'
+    - 'vendor/**/*'
+    - 'lib/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'storage/**/*'
+    - 'test/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'app/models/omni_user.rb'
+    - 'app/controllers/omniauth_callbacks_controller.rb'
+    - 'Gemfile.lock'

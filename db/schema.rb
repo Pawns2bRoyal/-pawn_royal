@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_10_11_224128) do
     t.integer "winning_player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "check_mate"
   end
 
   create_table "pieces", force: :cascade do |t|

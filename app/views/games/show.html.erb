@@ -1,9 +1,9 @@
 <br /><br />
-<div class="board offset-1 col-10">
+<div class="board text-center offset-1 col-10">
   
 </div>
 <script>
-  $(function(){
+  var drawboard = function() {
     for(var y = 0; y < 8; y++){
       $(".board").append('<div class="row y-' + y + '"></div>');
       for(var x = 0; x < 8; x++){
@@ -23,6 +23,8 @@
         }
       }
     }
-  })
+  };
+  
+  drawboard();
 
 </script>

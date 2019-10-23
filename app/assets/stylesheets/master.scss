@@ -1,6 +1,5 @@
 @import "bootstrap";
 
-.body 
 .board {
   padding: 0;
 }
@@ -9,15 +8,20 @@
 }
 
 .black-square {
-  width: 50px;
-  height: 50px;
-  background-color: black;
+  width: 70px;
+  height: 70px;
+  background-color: #ababab;
+  border: 1px solid black;
 }
 
 .white-square {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border: 1px solid black;
   background-color: white;
+}
+
+.chessPiece {
+  font-size: 55px;
 }
 

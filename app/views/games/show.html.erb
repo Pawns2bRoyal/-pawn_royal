@@ -8,18 +8,18 @@
       $(".board").append('<div class="row y-' + y + '"></div>');
       for(var x = 0; x < 8; x++){
         var rowNumber = ".y-" + y; 
-        console.log(rowNumber);
+        var yPosition = Math.abs(y-7);
         if(y % 2 === 0){
           if (x % 2 === 0)
-            $(rowNumber).append('<div class="black-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
           else
-            $(rowNumber).append('<div class="white-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
         }
         else{
           if (x % 2 === 0)
-            $(rowNumber).append('<div class="white-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
           else
-            $(rowNumber).append('<div class="black-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
         }
       }
     }
@@ -70,7 +70,7 @@
       }
 
       htmlDiv = '<div class="chessPiece">' + symbol + '</div>';
-      $('.y-5 .x-7').html(htmlDiv);
+      $('#0-0').html(htmlDiv);
   };
 
   drawboard();

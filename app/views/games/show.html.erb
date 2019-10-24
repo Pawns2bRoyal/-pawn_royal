@@ -1,28 +1,79 @@
 <br /><br />
-<div class="board offset-1 col-10">
+<div class="board text-center offset-1 col-10">
   
 </div>
 <script>
-  $(function(){
+  var drawboard = function() {
     for(var y = 0; y < 8; y++){
       $(".board").append('<div class="row y-' + y + '"></div>');
       for(var x = 0; x < 8; x++){
         var rowNumber = ".y-" + y; 
-        console.log(rowNumber);
+        var yPosition = Math.abs(y-7);
         if(y % 2 === 0){
           if (x % 2 === 0)
-            $(rowNumber).append('<div class="black-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
           else
-            $(rowNumber).append('<div class="white-square x-' + x + '"></div>');
+            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
         }
         else{
           if (x % 2 === 0)
-            $(rowNumber).append('<div class="white-square"></div>');
+            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
           else
-            $(rowNumber).append('<div class="black-square"></div>');
+            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
         }
       }
     }
-  })
+  };
+  
+  var drawPiece = function(type, color){
+      var symbol = "hello"
+
+      if (color === "White"){
+        if(type === "Pawn"){
+          symbol = '&#9817';
+        }
+        else if(type === "Rook"){
+          symbol = '&#9814';
+        }
+        else if(type === "Bishop"){
+          symbol = '&#9815';
+        }
+        else if(type === "Queen"){
+          symbol = '&#9813';
+        }
+        else if(type === "King"){
+          symbol = '&#9812';
+        }
+        else if(type === "Knight"){
+          symbol = '&#9816';
+        }
+      }
+      else if(color === "Black"){
+        if(type === "Pawn"){
+          symbol = '&#9823';
+        }
+        else if(type === "Rook"){
+          symbol = '&#9820';
+        }
+        else if(type === "Bishop"){
+          symbol = '&#9821';
+        }
+        else if(type === "Queen"){
+          symbol = '&#9819';
+        }
+        else if(type === "King"){
+          symbol = '&#9818';
+        }
+        else if(type === "Knight"){
+          symbol = '&#9822';
+        }
+      }
+
+      htmlDiv = '<div class="chessPiece">' + symbol + '</div>';
+      $('#0-0').html(htmlDiv);
+  };
+
+  drawboard();
+  drawPiece("Rook", "Black");
 
 </script>

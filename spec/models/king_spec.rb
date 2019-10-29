@@ -1,15 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe King, type: :model do
-    let(:game) { Game.new }
-    let(:board) { Board.new(true) }
-    let(:king) { King.new([4, 4], true) }
-    let(:enemy_king) { King.new([0, 0], false) }
-    before do
-        game.board = board
-        board.positions[0][0] = enemy_king
-        board.positions[4][4] = king
+    describe "#valid_move?" do
+    it "should return true to move one square forward" do
+        game = Game.create
+        king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id 
+        expect(king.valid_move?(6,5)).to eq(true)
     end
+
+    it "should return true to move one square backward" do
+        game = Game.create
+        king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id 
+        expect(king.valid_move?(4,5)).to eq(true)
+    end
+
+    it "should return true to move one square up" do
+        game = Game.create
+        king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id 
+        expect(king.valid_move?(5,4)).to eq(true)
+    end
+
+    it "should return true to move one square down" do
+        game = Game.create
+        king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id 
+        expect(king.valid_move?(5,6)).to eq(true)
+    end
+
+    it "should return true to move one square diagonally" do
+        game = Game.create
+        king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id 
+        expect(king.valid_move?(6,6)).to eq(true)
+    end
+
+    it "should return false to move two squares forward" do
+        
+    end
+end
 
   
 end

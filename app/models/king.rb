@@ -1,22 +1,12 @@
 class King < Piece
     
-    def self.get_valid_moves? (from_square, to_square)
-        valid_moves = []
-        valid_moves.push (
-            [from_square.x, from_square.y +1],
-            [from_square.x, from_square.y -1],
-            [from_square.x +1, from_square.y],
-            [from_square.x -1, from_square.y],
-            [from_square.x +1, from_square.y +1],
-            [from_square.x -1, from_square.y -1],
-            [from_square.x +1, from_square.y -1],
-            [from_square.x -1, from_square.y +1]
-        )
+    def valid_move?(new_x_coord, new_y_coord, id = nil, color = nil)
+        x_distance = x_distance(new_x_coord)
+        y_distance = y_distance(new_y_coord)
 
-        valid_children = valid_moves.select do |i|
-            i [0].between? (0,8) &&
-            i [1].between? (0,8)
-        end
-        valid_children.include? [to_square.x, to_square.y]
+        (x_distance == 1 && y_distance == 0) ||
+        (y_distance == 1 && x_distance == 0) ||
+        (y_distance == 1 && y_distance == x_distance) ||
+        legal_to_castle?(new_x_coord, new_y_coord)
     end
 end

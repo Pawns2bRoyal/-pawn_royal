@@ -78,7 +78,28 @@
             drawPiece("Pawn", "Black", x, 1);
         }
         drawPiece("Rook", "Black", 0,0);
-    }
+        drawPiece("Knight", "Black", 1,0);
+        drawPiece("Bishop", "Black", 2,0);
+        drawPiece("King", "Black", 3,0);
+        drawPiece("Queen", "Black", 4,0);
+        drawPiece("Bishop", "Black", 5,0);
+        drawPiece("Knight", "Black", 6,0);
+        drawPiece("Rook", "Black", 7,0);
+
+        for ( x = 0; x < 8; x++) {
+            drawPiece("Pawn", "White", x,6);
+        }
+        drawPiece("Rook", "White", 0,7);
+        drawPiece("Knight", "White", 1,7);
+        drawPiece("Bishop", "White", 2,7);
+        drawPiece("King", "White", 3,7);
+        drawPiece("Queen", "White", 4,7);
+        drawPiece("Bishop", "White", 5,7);
+        drawPiece("Knight", "White", 6,7);
+        drawPiece("Rook", "White", 7,7);
+            
+        };
+    
 
   drawboard();
   populateGame();

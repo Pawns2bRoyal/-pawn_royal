@@ -1,0 +1,112 @@
+<br /><br />
+<div class="board text-center offset-1 col-10">
+  
+</div>
+<script>
+  var drawboard = function() {
+    for(var y = 0; y < 8; y++){
+      $(".board").append('<div class="row y-' + y + '"></div>');
+      for(var x = 0; x < 8; x++){
+        var rowNumber = ".y-" + y; 
+        var yPosition = Math.abs(y-7);
+        if(y % 2 === 0){
+          if (x % 2 === 0)
+            $(rowNumber).append('<div class="black-square cell" id="' + x + '-' + yPosition +'"></div>');
+          else
+            $(rowNumber).append('<div class="white-square cell" id="' + x + '-' + yPosition +'"></div>');
+        }
+        else{
+          if (x % 2 === 0)
+            $(rowNumber).append('<div class="white-square cell" id="' + x + '-' + yPosition +'"></div>');
+          else
+            $(rowNumber).append('<div class="black-square cell" id="' + x + '-' + yPosition +'"></div>');
+        }
+      }
+    }
+  };
+  
+  var drawPiece = function(type, color, x, y){
+      var symbol = "hello"
+
+      if (color === "White"){
+        if(type === "Pawn"){
+          symbol = '&#9817';
+        }
+        else if(type === "Rook"){
+          symbol = '&#9814';
+        }
+        else if(type === "Bishop"){
+          symbol = '&#9815';
+        }
+        else if(type === "Queen"){
+          symbol = '&#9813';
+        }
+        else if(type === "King"){
+          symbol = '&#9812';
+        }
+        else if(type === "Knight"){
+          symbol = '&#9816';
+        }
+      }
+      else if(color === "Black"){
+        if(type === "Pawn"){
+          symbol = '&#9823';
+        }
+        else if(type === "Rook"){
+          symbol = '&#9820';
+        }
+        else if(type === "Bishop"){
+          symbol = '&#9821';
+        }
+        else if(type === "Queen"){
+          symbol = '&#9819';
+        }
+        else if(type === "King"){
+          symbol = '&#9818';
+        }
+        else if(type === "Knight"){
+          symbol = '&#9822';
+        }
+      }
+
+      var htmlDiv = '<div class= '+ type +'>' + symbol + '</div>';
+      $('#' + x + '-' + y).html(htmlDiv);
+  };
+
+    var populateGame = function() {
+        for ( x = 0; x < 8; x++) {
+            drawPiece("Pawn", "Black", x, 1);
+        }
+        drawPiece("Rook", "Black", 0,0);
+        drawPiece("Knight", "Black", 1,0);
+        drawPiece("Bishop", "Black", 2,0);
+        drawPiece("King", "Black", 3,0);
+        drawPiece("Queen", "Black", 4,0);
+        drawPiece("Bishop", "Black", 5,0);
+        drawPiece("Knight", "Black", 6,0);
+        drawPiece("Rook", "Black", 7,0);
+
+        for ( x = 0; x < 8; x++) {
+            drawPiece("Pawn", "White", x,6);
+        }
+        drawPiece("Rook", "White", 0,7);
+        drawPiece("Knight", "White", 1,7);
+        drawPiece("Bishop", "White", 2,7);
+        drawPiece("King", "White", 3,7);
+        drawPiece("Queen", "White", 4,7);
+        drawPiece("Bishop", "White", 5,7);
+        drawPiece("Knight", "White", 6,7);
+        drawPiece("Rook", "White", 7,7);
+            
+        };
+    
+
+  drawboard();
+  populateGame();
+
+  $('.cell').click(function(x){
+      console.log(x.target.id);
+  });
+    
+
+</script>

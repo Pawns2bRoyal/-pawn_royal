@@ -46,8 +46,8 @@ class Piece < ApplicationRecord
         if piece.x_coordinate == x && piece.y_coordinate == y
           return false
         end
-        x++
-        y++
+        x += 1
+        y += 1
       end
       
       x = x_coordinate - 1;
@@ -56,8 +56,8 @@ class Piece < ApplicationRecord
         if piece.x_coordinate == x && piece.y_coordinate == y
           return false
         end
-        x--
-        y--
+        x-=1
+        y-=1
       end
     end
   end

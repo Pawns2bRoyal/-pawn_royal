@@ -69,11 +69,11 @@
         }
       }
 
-      htmlDiv = '<div class="chessPiece">' + symbol + '</div>';
+      htmlDiv = '<div class="chessPiece"' + 'id="' + type +'">' + symbol + '</div>';
       $('#0-0').html(htmlDiv);
   };
 
   drawboard();
-  drawPiece("Rook", "Black");
+  drawPiece("Knight", "Black");
 
 </script>

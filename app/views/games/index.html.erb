@@ -119,13 +119,13 @@ var drawboard = function() {
             var destination_square = $(this);
             var update_piece = {
                 id: piece.data('piece-id'),
-                x_coordinate: destination_square.data('x-coord'),
-                y_coordinate: destination_square.data('y-coord')
+                x_coordinate: destination_square.data('x-coord.to_i'),
+                y_coordinate: destination_square.data('y-coord.to_i')
             }
 
             $.ajax({
                 type: 'PATCH',
-                url: '/pieces/' + update_piece.id,
+                url: '/games/' + update_piece.id,
                 beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')) },
                 dataType: 'json',
                 data: { id: update_piece.id, x_coordinate: update_piece.x_coordinate, y_coordinate: update_piece.y_coordinate },

@@ -77,6 +77,14 @@ var drawboard = function() {
   };
 
     var populateGame = function() {
+
+    let rawJ = '<%= raw(@game.to_json(:include => :pieces)) %>'; 
+    console.log(JSON.parse(rawJ));
+
+    
+
+
+
         for ( x = 0; x < 8; x++) {
             drawPiece("Pawn", "Black", x, 1);
         }

@@ -11,15 +11,15 @@ class Game < ApplicationRecord
   private
 
   def initialize_board!
-    # Black Pieces
-    # (0..7).each do |i|
-    #   Pawn.create(
-    #     game_id: id
-    #     x_coordinate: i,
-    #     y_coordinate: 1,
-    #     color: "Black"
-    #     )
-    # end
+    #Black Pieces
+    (0..7).each do |i|
+      Pawn.create(
+        game_id: id,
+        x_coordinate: i,
+        y_coordinate: 1,
+        color: "Black"
+        )
+    end
 
     Rook.create(game_id: id, x_coordinate: 0, y_coordinate: 0, color: "Black")
     Knight.create(game_id: id, x_coordinate: 1, y_coordinate: 0, color: "Black")
@@ -32,16 +32,15 @@ class Game < ApplicationRecord
 
 
 
-
     # White Pieces
-    # (0..7).each do |i|
-    #   Pawn.create(
-    #     game_id: i-6,
-    #     x_coordinate: i,
-    #     y_coordinate: 6,
-    #     color: "White"
-    #     )
-    # end
+    (0..7).each do |i|
+      Pawn.create(
+        game_id: id,
+        x_coordinate: i,
+        y_coordinate: 6,
+        color: "White"
+        )
+    end
 
     Rook.create(game_id: id, x_coordinate: 0, y_coordinate: 7, color: "White")
     Knight.create(game_id: id, x_coordinate: 1, y_coordinate: 7, color: "White")

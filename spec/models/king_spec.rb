@@ -33,6 +33,7 @@ RSpec.describe King, type: :model do
     end
 
     it "should return false to move two squares forward" do
+    
         
     end
     end

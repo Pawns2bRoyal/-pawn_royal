@@ -33,6 +33,10 @@ RSpec.describe King, type: :model do
     end
 
     it "should return false to move two squares forward" do
+      current_user = FactoryBot.create(:user, id:1)
+      game = Game.create
+      king = FactoryBot.create :king, x_coord: 5, y_coord: 5, game_id: game.id, user_id: 1
+      expect(king.valid_move?(7, 5)).to eq(false)
         
     end
 end

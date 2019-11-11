@@ -1,10 +1,17 @@
 class GamesController < ApplicationController
 
-  def show
-
+  def create
+    #will trigger game creation in DB
+    #will redirect to show
   end
 
-  def index
+  def new
+    #provide info/details for new game (name, email, etc)
+    #reder THIS 
+  end
+
+
+  def index    #change to show
     @game = Game.create
     @pieces = Piece.all
   end
@@ -13,7 +20,7 @@ class GamesController < ApplicationController
 		@piece = Piece.find
 
 		@piece.update
-		respind_to do |format|
+		respond_to do |format|
 			format.html 
 			format.json 
     end

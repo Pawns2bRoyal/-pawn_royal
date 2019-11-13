@@ -3,30 +3,37 @@
   
 </div>
 <script>
-  var drawboard = function() {
-    for(var y = 0; y < 8; y++){
-      $(".board").append('<div class="row y-' + y + '"></div>');
-      for(var x = 0; x < 8; x++){
-        var rowNumber = ".y-" + y; 
-        var yPosition = Math.abs(y-7);
-        if(y % 2 === 0){
-          if (x % 2 === 0)
-            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
-          else
-            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
+var drawboard = function() {
+    for (var y = 0; y < 8; y++) {
+        $(".board").append('<div class="row y-' + y + '"></div>');
+        for (var x = 0; x < 8; x++) {
+            var rowNumber = ".y-" + y;
+            var yPosition = Math.abs(y - 7);
+            if (y % 2 === 0) {
+                if (x % 2 === 0)
+                    $(rowNumber).append('<div class="droppable black-square"  data-x-coord=' +
+                        x + ' data-y-coord=' + yPosition + ' id="' + x + '-' + yPosition + '" ></div>');
+                else
+                    $(rowNumber).append('<div class="droppable white-square" data-x-coord=' +
+                        x + ' data-y-coord=' + yPosition + ' id="' + x + '-' + yPosition + '"></div>');
+            } else {
+                if (x % 2 === 0)
+                    $(rowNumber).append('<div class="droppable white-square" data-x-coord=' +
+                        x + ' data-y-coord=' + yPosition + ' id="' + x + '-' + yPosition + '"></div>');
+                else
+                    $(rowNumber).append('<div class="droppable black-square" data-x-coord=' +
+                        x + ' data-y-coord=' + yPosition + ' id="' + x + '-' + yPosition + '"></div>');
+            }
         }
-        else{
-          if (x % 2 === 0)
-            $(rowNumber).append('<div class="white-square" id="' + x + '-' + yPosition +'"></div>');
-          else
-            $(rowNumber).append('<div class="black-square" id="' + x + '-' + yPosition +'"></div>');
-        }
-      }
     }
-  };
-  
-  var drawPiece = function(type, color){
-      var symbol = "hello"
+};
+
+
+var actualGame;
+
+var drawPiece = function(type, color, x, y, id){
+      
+      var symbol = ""
 
       if (color === "White"){
         if(type === "Pawn"){
@@ -69,11 +76,55 @@
         }
       }
 
-      htmlDiv = '<div class="chessPiece">' + symbol + '</div>';
-      $('#0-0').html(htmlDiv);
+      htmlDiv = '<div class="chessPiece" data-piece-id='+id+' data-x-coord='+x+' data-y-coord='+y+'>' + symbol + '</div>';
+      $('#' + x + '-' + y).html(htmlDiv);
   };
 
+  var populateGame = function() {
+    var rawJ = '<%= raw(@game.to_json(:include => :pieces)) %>'; 
+    rawJ = JSON.parse(rawJ)
+    actualGame = rawJ;
+    console.log(rawJ);
+      rawJ.pieces.forEach(function(piece) {
+          drawPiece(piece.kind, piece.color, piece.x_coordinate, piece.y_coordinate, piece.id)
+      })         
+  };
+    
+
   drawboard();
-  drawPiece("Rook", "Black");
+  populateGame();
+
+  $(document).ready(function() {
+    $('.chessPiece').draggable({
+        snap: '.droppable',
+        revert: 'invalid'
+    });
+
+    $('.droppable').droppable({
+        drop: function(event, ui) {
+            var piece = ui.draggable
+            var destination_square = $(this);
+            var update_piece = {
+                id: parseInt(piece.context.dataset.pieceId, 10),
+                x_coordinate: parseInt(piece.context.dataset.xCoord),
+                y_coordinate: parseInt(piece.context.dataset.yCoord)
+            }
+            console.log(update_piece)
+            $.ajax({
+                type: 'PUT',
+                url: '/games/' + actualGame.id,
+                beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')) },
+                dataType: 'json',
+                data: { piece_id: update_piece.id, x_coordinate: update_piece.x_coordinate, y_coordinate: update_piece.y_coordinate },
+                success: function(data) {
+                    destination_square.empty();
+                    location.reload(true);
+                }
+
+            });
+        }
+    });
+});
+    
 
 </script>

@@ -105,11 +105,14 @@ var drawPiece = function(type, color, x, y, id){
             var piece = ui.draggable
             var destination_square = $(this);
             var update_piece = {
-                id: parseInt(piece.context.dataset.pieceId, 10),
-                x_coordinate: parseInt(piece.context.dataset.xCoord),
-                y_coordinate: parseInt(piece.context.dataset.yCoord)
+                id: piece.data('piece-id'),
+                x_position: parseInt(destination_square.attr('data-x-coord')),
+                y_position: parseInt(destination_square.attr('data-y-coord'))
             }
             console.log(update_piece)
+            console.log(destination_square)
+            console.log(destination_square.attr('id'))
+
             $.ajax({
                 type: 'PUT',
                 url: '/games/' + actualGame.id,

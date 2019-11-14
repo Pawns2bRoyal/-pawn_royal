@@ -25,13 +25,7 @@ class GamesController < ApplicationController
 
     @piece = Piece.find(params[:piece_id])
   
-    
-
-		@piece.update(piece_params)
-		respond_to do |format|
-			format.html 
-			format.json 
-    end
+		
   end
   
   private
@@ -40,7 +34,5 @@ class GamesController < ApplicationController
     params.require(:game).permit(:name)
   end
 
-  def piece_params
-    params.permit(:x_coordinate, :y_coordinate)
-  end
+  
 end

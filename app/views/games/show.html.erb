@@ -1,6 +1,5 @@
 <br /><br />
 <div class="board text-center offset-1 col-10">
-  
 </div>
 <script>
 var drawboard = function() {
@@ -31,70 +30,59 @@ var drawboard = function() {
 
 var actualGame;
 
-var drawPiece = function(type, color, x, y, id){
-      
-      var symbol = ""
+var drawPiece = function(type, color, x, y, id) {
 
-      if (color === "White"){
-        if(type === "Pawn"){
-          symbol = '&#9817';
-        }
-        else if(type === "Rook"){
-          symbol = '&#9814';
-        }
-        else if(type === "Bishop"){
-          symbol = '&#9815';
-        }
-        else if(type === "Queen"){
-          symbol = '&#9813';
-        }
-        else if(type === "King"){
-          symbol = '&#9812';
-        }
-        else if(type === "Knight"){
-          symbol = '&#9816';
-        }
-      }
-      else if(color === "Black"){
-        if(type === "Pawn"){
-          symbol = '&#9823';
-        }
-        else if(type === "Rook"){
-          symbol = '&#9820';
-        }
-        else if(type === "Bishop"){
-          symbol = '&#9821';
-        }
-        else if(type === "Queen"){
-          symbol = '&#9819';
-        }
-        else if(type === "King"){
-          symbol = '&#9818';
-        }
-        else if(type === "Knight"){
-          symbol = '&#9822';
-        }
-      }
+    var symbol = ""
 
-      htmlDiv = '<div class="chessPiece" data-piece-id='+id+' data-x-coord='+x+' data-y-coord='+y+'>' + symbol + '</div>';
-      $('#' + x + '-' + y).html(htmlDiv);
-  };
+    if (color === "White") {
+        if (type === "Pawn") {
+            symbol = '&#9817';
+        } else if (type === "Rook") {
+            symbol = '&#9814';
+        } else if (type === "Bishop") {
+            symbol = '&#9815';
+        } else if (type === "Queen") {
+            symbol = '&#9813';
+        } else if (type === "King") {
+            symbol = '&#9812';
+        } else if (type === "Knight") {
+            symbol = '&#9816';
+        }
+    } else if (color === "Black") {
+        if (type === "Pawn") {
+            symbol = '&#9823';
+        } else if (type === "Rook") {
+            symbol = '&#9820';
+        } else if (type === "Bishop") {
+            symbol = '&#9821';
+        } else if (type === "Queen") {
+            symbol = '&#9819';
+        } else if (type === "King") {
+            symbol = '&#9818';
+        } else if (type === "Knight") {
+            symbol = '&#9822';
+        }
+    }
 
-  var populateGame = function() {
-    var rawJ = '<%= raw(@game.to_json(:include => :pieces)) %>'; 
+    htmlDiv = '<div class="chessPiece" data-piece-id=' + id + ' data-x-coord=' + x + ' data-y-coord=' + y + '>' + symbol + '</div>';
+    $('#' + x + '-' + y).html(htmlDiv);
+};
+
+var populateGame = function() {
+    var rawJ = '<%= raw(@game.to_json(:include => :pieces)) %>';
     rawJ = JSON.parse(rawJ)
     actualGame = rawJ;
     console.log(rawJ);
-      rawJ.pieces.forEach(function(piece) {
-          drawPiece(piece.kind, piece.color, piece.x_coordinate, piece.y_coordinate, piece.id)
-      })         
-  };
-    
+    rawJ.pieces.forEach(function(piece) {
+        drawPiece(piece.kind, piece.color, piece.x_coordinate, piece.y_coordinate, piece.id)
+    })
+};
 
-  drawboard();
-  populateGame();
 
-  $(document).ready(function() {
+drawboard();
+populateGame();
+
+$(document).ready(function() {
     $('.chessPiece').draggable({
         snap: '.droppable',
         revert: 'invalid'
@@ -106,19 +94,17 @@ var drawPiece = function(type, color, x, y, id){
             var destination_square = $(this);
             var update_piece = {
                 id: piece.data('piece-id'),
-                x_position: parseInt(destination_square.attr('data-x-coord')),
-                y_position: parseInt(destination_square.attr('data-y-coord'))
+                x_coordinate: destination_square.data('x-coord'),
+                y_coordinate: destination_square.data('y-coord')
             }
-            console.log(update_piece)
-            console.log(destination_square)
-            console.log(destination_square.attr('id'))
+
 
             $.ajax({
                 type: 'PUT',
-                url: '/games/' + actualGame.id,
+                url: '/pieces/' + update_piece.id,
                 beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')) },
                 dataType: 'json',
-                data: { piece_id: update_piece.id, x_coordinate: update_piece.x_coordinate, y_coordinate: update_piece.y_coordinate },
+                data: { id: update_piece.id, x_coordinate: update_piece.x_coordinate, y_coordinate: update_piece.y_coordinate },
                 success: function(data) {
                     destination_square.empty();
                     location.reload(true);
@@ -128,6 +114,4 @@ var drawPiece = function(type, color, x, y, id){
         }
     });
 });
-    
-
 </script>

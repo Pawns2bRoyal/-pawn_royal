@@ -8,7 +8,7 @@ class CreatePieces < ActiveRecord::Migration[5.2]
       t.integer "game_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string "type"
+      t.string "kind"
       t.string "state"
       t.string "symbol"
       t.timestamps

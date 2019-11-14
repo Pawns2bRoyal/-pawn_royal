@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_10_11_224128) do
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
+    t.string "kind"
     t.string "state"
     t.string "symbol"
   end

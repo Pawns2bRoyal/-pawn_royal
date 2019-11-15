@@ -39,11 +39,5 @@ RSpec.describe King, type: :model do
       expect(king.valid_move?(7, 5)).to eq(false)
         
     end
-end
-
-    
-        
-    end
-    end
-  
+end  
 end

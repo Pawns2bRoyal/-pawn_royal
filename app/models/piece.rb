@@ -3,10 +3,15 @@
 class Piece < ApplicationRecord
   belongs_to :game
   self.inheritance_column = :type
-
+  
   def self.types
     %w[Pawn Rook Knight Bishop Queen King]
   end
+  
+  #validates :id
+  
+  #before_validation :is_obstructed_vertical, is_obstructed_vertical, :is_obstructed_diagonal 
+ 
 
   def is_obstructed_horizontal?
     @pieces = Piece.all

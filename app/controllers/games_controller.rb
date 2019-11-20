@@ -9,15 +9,13 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
-    #provide info/details for new game (name, email, etc)
-    #reder THIS 
   end
 
 
   def index
   end
 
-  def show   #change to show
+  def show 
     @game = Game.find(params[:id])
   end
 
